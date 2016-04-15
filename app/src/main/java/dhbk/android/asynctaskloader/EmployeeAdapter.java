@@ -1,6 +1,7 @@
 package dhbk.android.asynctaskloader;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +18,10 @@ import butterknife.ButterKnife;
  * Make adapter for listview
  */
 public class EmployeeAdapter extends BaseAdapter {
+    private static final String TAG = EmployeeAdapter.class.getName();
     private final ArrayList<Employee> employees;
     private LayoutInflater inflater;
+    private ArrayList<Employee> mEmployees;
 
     public EmployeeAdapter(Context context, ArrayList<Employee> employees) {
         this.employees = employees;
@@ -42,10 +45,12 @@ public class EmployeeAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        Log.i(TAG, Constant.LOADER_ACTIVITY + "getView: ");
         ViewHolder viewHolder;
         Employee emp = (Employee) getItem(position);
         // tạo viewholder tiết kiệm bộ nhớ
         if (convertView == null) {
+            Log.i(TAG, Constant.LOADER_ACTIVITY + "getView: convertView = null");
             convertView = inflater.inflate(R.layout.employeedata, parent, false);
             viewHolder = new ViewHolder(convertView);
             convertView.setTag(viewHolder);
@@ -55,6 +60,12 @@ public class EmployeeAdapter extends BaseAdapter {
         viewHolder.mEmpid.setText(emp.empid);
         viewHolder.mEmpname.setText(emp.name);
         return convertView;
+    }
+
+    public void setEmployees(ArrayList<Employee> employees) {
+        Log.i(TAG, Constant.LOADER_ACTIVITY + "setEmployees: " + employees.get(0).name);
+        this.employees.addAll(employees);
+        notifyDataSetChanged();
     }
 
     static class ViewHolder {
