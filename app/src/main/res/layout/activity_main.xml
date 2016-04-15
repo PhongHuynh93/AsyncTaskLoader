@@ -7,8 +7,8 @@
     android:orientation="vertical"
     tools:context="dhbk.android.asynctaskloader.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"/>
+    <ListView
+        android:id="@+id/employee_list"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"/>
 </LinearLayout>
